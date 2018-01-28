@@ -8,9 +8,6 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/node:8.9.4
-    branches:
-      only:
-        - master
     steps:
       - checkout
       # Download and cache dependencies
