@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc/sand-admin/browser",
+    "baseUrl": "./",
+    "module": "es2015",
+    "types": []
+  },
+  "exclude": ["test.ts", "**/*.spec.ts"],
+  "include": ["**/*.ts"],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhiteSpace": false,
+    "strictInjectionParameters": true,
+    "annotateForClosureCompiler": true
+  }
+}

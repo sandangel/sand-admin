@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc/spec",
+    "baseUrl": "./",
+    "module": "commonjs",
+    "types": ["jest", "node"],
+    "paths": {
+      "@sand-admin/*": ["libs/*", "apps/sand-admin/src/app/*", "apps/sand-admin/src/environments/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/e2e/*.ts", "**/*.e2e-spec.ts", "**/*.po.ts", "node_modules", "tmp", "cypress"]
+}

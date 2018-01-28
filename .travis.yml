@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8"
+env:
+  - CYPRESS_RECORD_KEY=89e32e68-daf9-4021-adf7-6b291321b884
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
+before_script:
+  - $(npm bin)/cypress verify
+script:
+  - npm run test:e2e

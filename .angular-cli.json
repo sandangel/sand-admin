@@ -1,26 +1,41 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "ngrx-admin"
+    "name": "sand-admin",
+    "npmScope": "sand-admin",
+    "latestMigration": "20180120-update-prettier"
   },
   "apps": [
     {
-      "root": "src",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "root": "apps/sand-admin/src",
+      "outDir": "dist/browser",
+      "assets": ["assets", "favicon.ico"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
-      "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "styles.scss"
-      ],
+      "testTsconfig": "../../../tsconfig.unit.json",
+      "prefix": "",
+      "styles": ["styles.scss"],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "name": "sand-admin"
+    },
+    {
+      "platform": "server",
+      "root": "apps/sand-admin/src",
+      "outDir": "dist/server",
+      "assets": ["assets", "favicon.ico"],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "tsconfig": "tsconfig.uni.json",
+      "testTsconfig": "../../../tsconfig.unit.json",
+      "prefix": "",
+      "styles": ["styles.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -29,32 +44,31 @@
       }
     }
   ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
   "lint": [
     {
-      "project": "src/tsconfig.app.json",
+      "project": "apps/sand-admin/src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },
     {
-      "project": "src/tsconfig.spec.json",
+      "project": "./tsconfig.spec.json",
       "exclude": "**/node_modules/**"
     },
     {
-      "project": "e2e/tsconfig.e2e.json",
+      "project": "cypress/tsconfig.e2e.json",
       "exclude": "**/node_modules/**"
     }
   ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+      "changeDetection": "OnPush",
+      "inlineStyle": true,
+      "inlineTemplate": true
+    },
+    "schematics": {
+      "collection": "@nrwl/schematics",
+      "postGenerate": "npm run format",
+      "newProject": ["app", "lib"]
+    }
   }
 }
