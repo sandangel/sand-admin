@@ -7,10 +7,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: cypress/base:8
-    branches:
-      only:
-        - master
+      - image: circleci/node:8.9.4
     steps:
       - checkout
       # Download and cache dependencies
@@ -20,10 +17,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: npm install
-      - run: $(npm bin)/cypress verify
 
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: CYPRESS_RECORD_KEY=89e32e68-daf9-4021-adf7-6b291321b884 npm test
+      - run: npm run test:unit
