@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "cypress": "cypress run",
     "test:unit": "jest",
     "test:cypress": "cypress run --record",
     "test:e2e": "npm run build:ssr && run-p --race serve:ssr test:cypress",
@@ -117,8 +118,9 @@
       "html"
     ],
     "moduleNameMapper": {
-      "@app/(.*)": "<rootDir>/apps/sand-admin/src/app/$1",
-      "@env/(.*)": "<rootDir>/apps/sand-admin/src/environments/$1"
+      "@sand-libs/(.*)": "<rootDir>/libs/$1",
+      "@sand-apps/(.*)": "<rootDir>/apps/sand-admin/src/apps/$1",
+      "@sand-envs/(.*)": "<rootDir>/apps/sand-admin/src/environments/$1"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!@ngrx)"

@@ -6,7 +6,9 @@
     "module": "commonjs",
     "types": ["jest", "node"],
     "paths": {
-      "@sand-admin/*": ["libs/*", "apps/sand-admin/src/app/*", "apps/sand-admin/src/environments/*"]
+      "@sand-libs/*": ["libs/*"],
+      "@sand-apps/*": ["apps/sand-admin/src/app/*"],
+      "@sand-envs/*": ["apps/sand-admin/src/environments/*"]
     }
   },
   "include": ["**/*.ts"],
