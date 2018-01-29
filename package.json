@@ -7,10 +7,12 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "cypress": "cypress run",
-    "test:unit": "jest",
+    "test:unit": "nyc jest",
     "test:cypress": "cypress run --record",
     "test:e2e": "npm run build:ssr && run-p --race serve:ssr test:cypress",
     "test": "run-p test:unit test:e2e",
+    "watch:tests": "chokidar './**/*.ts' --initial -c 'nyc --reporter=text --reporter=html yarn run test:unit'",
+    "coverage:html": "nyc report --reporter=html",
     "lint": "ng lint",
     "apps:affected": "./node_modules/.bin/nx affected apps",
     "build:affected": "./node_modules/.bin/nx affected build",
@@ -50,8 +52,8 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/platform-server": "^5.2.2",
-    "@angular/service-worker": "^5.2.2",
     "@angular/router": "^5.2.0",
+    "@angular/service-worker": "^5.2.2",
     "@ngrx/effects": "5.0.1",
     "@ngrx/router-store": "5.0.1",
     "@ngrx/store": "5.0.0",
@@ -63,6 +65,7 @@
     "hammerjs": "^2.0.8",
     "rxjs": "^5.5.6",
     "ts-loader": "^3.3.1",
+    "typescript": "~2.6.2",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
@@ -81,6 +84,7 @@
     "@types/jest": "^22.1.0",
     "@types/mocha": "^2.2.47",
     "@types/node": "^8.0.0",
+    "chokidar-cli": "^1.2.0",
     "codelyzer": "^4.0.1",
     "commitizen": "^2.9.6",
     "cypress": "^1.4.1",
@@ -92,12 +96,12 @@
     "lint-staged": "^6.1.0",
     "node-sass": "^4.7.2",
     "npm-run-all": "^4.1.2",
+    "nyc": "^11.4.1",
     "prettier": "1.10.2",
     "reflect-metadata": "^0.1.12",
     "standard-version": "^4.3.0",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "~2.6.2",
     "webpack": "^3.10.0"
   },
   "jest": {
@@ -126,12 +130,37 @@
     "transformIgnorePatterns": [
       "node_modules/(?!@ngrx)"
     ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "index.ts"
-    ],
     "modulePathIgnorePatterns": [
       "dist"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/*.d.ts",
+      "!**/index.ts",
+      "!**/node_modules/**",
+      "!**/cypress/**"
+    ],
+    "mapCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.spec",
+      "**/spec/**/*",
+      "**/index.ts",
+      "/cypress/**/*",
+      "/setupJest.ts",
+      "/jestGlobalMocks.ts"
+    ],
+    "include": [
+      "apps/**/*.ts",
+      "libs/**/*.ts"
     ]
   },
   "prettier": {
