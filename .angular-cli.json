@@ -1,47 +1,65 @@
 {
   "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "sand-admin",
-    "npmScope": "sand-admin",
-    "latestMigration": "20180120-update-prettier"
+    "name": "sand-admin"
   },
   "apps": [
     {
+      "name": "sand-admin",
       "root": "apps/sand-admin/src",
       "outDir": "dist/browser",
-      "assets": ["assets", "favicon.ico"],
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "../../../tsconfig.unit.json",
       "prefix": "",
-      "styles": ["styles.scss"],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      },
-      "name": "sand-admin"
-    },
-    {
-      "platform": "server",
-      "root": "apps/sand-admin/src",
-      "outDir": "dist/server",
-      "assets": ["assets", "favicon.ico"],
-      "index": "index.html",
-      "main": "main.server.ts",
-      "tsconfig": "tsconfig.uni.json",
-      "testTsconfig": "../../../tsconfig.unit.json",
-      "prefix": "",
-      "styles": ["styles.scss"],
+      "serviceWorker": true,
+      "styles": [
+        "styles.scss"
+      ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+      "root": "apps/sand-admin/src",
+      "outDir": "dist/server",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "platform": "server",
+      "index": "index.html",
+      "main": "main.server.ts",
+      "tsconfig": "tsconfig.ngu.json",
+      "prefix": "",
+      "serviceWorker": true,
+      "styles": [
+        "styles.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "material",
+      "appRoot": "",
+      "root": "libs/material/src"
+    },
+    {
+      "name": "shared",
+      "appRoot": "",
+      "root": "libs/shared/src"
     }
   ],
   "lint": [
@@ -61,14 +79,12 @@
   "defaults": {
     "styleExt": "scss",
     "component": {
-      "changeDetection": "OnPush",
       "inlineStyle": true,
-      "inlineTemplate": true
+      "inlineTemplate": true,
+      "changeDetection": "OnPush"
     },
     "schematics": {
-      "collection": "@nrwl/schematics",
-      "postGenerate": "npm run format",
-      "newProject": ["app", "lib"]
+      "collection": "@nrwl/schematics"
     }
   }
 }

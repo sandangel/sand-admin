@@ -4,7 +4,12 @@
     "outDir": "../../../dist/out-tsc/sand-admin/browser",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": [],
+    "paths": {
+      "@sand-libs/*": ["../../../libs/*"],
+      "@sand-apps/*": ["./app/*"],
+      "@sand-envs/*": ["./environments/*"]
+    }
   },
   "exclude": ["test.ts", "**/*.spec.ts"],
   "include": ["**/*.ts"],

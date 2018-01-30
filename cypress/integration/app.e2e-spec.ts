@@ -1,14 +1,13 @@
-/// <reference path="../../node_modules/cypress/types/index.d.ts" />
-
+/// <reference types="cypress" />
 import { add } from '../support/add';
 
 // brings type definition from @types/chai
-// declare const expect: Chai.ExpectStatic
+declare const expect: Chai.ExpectStatic;
+
 describe('TypeScript', () => {
   it('works', () => {
     // note TypeScript definition
     const x = 42;
-    expect(true).to.equal(true);
     expect(x).to.equal(42);
   });
 
