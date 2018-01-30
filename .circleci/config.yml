@@ -8,8 +8,6 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/node:8.9.4
-    environment:
-      - PATH: {{ $PATH }}:{{ $CIRCLE_WORKING_DIRECTORY }}/node_modules/.bin
     steps:
       - checkout
       # Download and cache dependencies
@@ -19,6 +17,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: npm install
+
+      - run: echo 'export PATH=$CIRCLE_WORKING_DIRECTORY/node_modules/.bin:$PATH' >> $BASH_ENV
 
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
