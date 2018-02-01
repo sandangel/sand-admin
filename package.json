@@ -16,7 +16,7 @@
     "affected:apps": "./node_modules/.bin/nx affected apps",
     "affected:build": "./node_modules/.bin/nx affected build",
     "affected:e2e": "./node_modules/.bin/nx affected e2e",
-    "format": "./node_modules/.bin/nx format write",
+    "format": "pretty-quick --staged",
     "format:write": "./node_modules/.bin/nx format write",
     "format:check": "./node_modules/.bin/nx format check",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
@@ -93,6 +93,7 @@
     "npm-run-all": "^4.1.2",
     "nyc": "^11.4.1",
     "prettier": "1.10.2",
+    "pretty-quick": "^1.2.3",
     "reflect-metadata": "^0.1.12",
     "standard-version": "^4.3.0",
     "ts-node": "~4.1.0",
@@ -143,7 +144,8 @@
     ],
     "mapCoverage": true,
     "coveragePathIgnorePatterns": [
-      "/node_modules/", "/__snapshots__/"
+      "/node_modules/",
+      "/__snapshots__/"
     ]
   },
   "prettier": {
