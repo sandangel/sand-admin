@@ -30,7 +30,7 @@
     "webpack:server": "webpack --config webpack.server.config.js --colors",
     "precommit": "lint-staged",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "commit": "git-cz",
+    "git:commit": "git-cz",
     "changelog": "standard-version"
   },
   "private": true,
