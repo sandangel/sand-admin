@@ -18,7 +18,7 @@
     "lib": ["es2017", "dom"],
     "paths": {
       "@sand-libs/*": ["libs/*"],
-      "@sand-apps/*": ["apps/sand-admin/src/app/*"],
+      "@sand-app/*": ["apps/sand-admin/src/app/*"],
       "@sand-envs/*": ["apps/sand-admin/src/environments/*"]
     },
     "baseUrl": "."
