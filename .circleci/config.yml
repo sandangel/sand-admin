@@ -15,10 +15,10 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "package.json" }}
+          - v3-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
-      - run: npm install
+          - v3-dependencies-
+      - run: yarn install
 
       - run: echo 'export PATH=$CIRCLE_WORKING_DIRECTORY/node_modules/.bin:$PATH' >> $BASH_ENV
 
@@ -26,4 +26,4 @@ jobs:
           key: v2-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: npm run test:e2e
+      - run: yarn run test:e2e

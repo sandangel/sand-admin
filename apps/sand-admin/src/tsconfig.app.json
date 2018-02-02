@@ -7,7 +7,7 @@
     "types": [],
     "paths": {
       "@sand-libs/*": ["../../../libs/*"],
-      "@sand-apps/*": ["./app/*"],
+      "@sand-app/*": ["./app/*"],
       "@sand-envs/*": ["./environments/*"]
     }
   },
