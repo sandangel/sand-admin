@@ -6,6 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const SHARED_MODULES: any[] = [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule];
 
 @NgModule({
-  imports: [...SHARED_MODULES]
+  exports: [...SHARED_MODULES]
 })
 export class SharedModule {}
