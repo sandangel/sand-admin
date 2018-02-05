@@ -22,6 +22,8 @@ import {
   MatDialogModule
 } from '@angular/material';
 
+import { LayoutModule } from '@angular/cdk/layout';
+
 export const MATERIAL_MODULES: any[] = [
   MatCardModule,
   MatExpansionModule,
@@ -45,7 +47,9 @@ export const MATERIAL_MODULES: any[] = [
   MatDialogModule
 ];
 
+export const CDK_MODULES: any[] = [LayoutModule];
+
 @NgModule({
-  exports: [...MATERIAL_MODULES]
+  exports: [...MATERIAL_MODULES, ...CDK_MODULES]
 })
 export class MaterialModule {}
