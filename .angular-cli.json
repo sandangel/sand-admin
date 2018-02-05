@@ -8,19 +8,14 @@
       "name": "sand-admin",
       "root": "apps/sand-admin/src",
       "outDir": "dist/browser",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": ["assets", "favicon.ico"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "tsconfig": "tsconfig.app.json",
-      "prefix": "",
+      "prefix": "sand",
       "serviceWorker": true,
-      "styles": [
-        "styles.scss"
-      ],
+      "styles": ["styles.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -31,25 +26,26 @@
     {
       "root": "apps/sand-admin/src",
       "outDir": "dist/server",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": ["assets", "favicon.ico"],
       "platform": "server",
       "index": "index.html",
       "main": "main.server.ts",
       "tsconfig": "tsconfig.ngu.json",
       "prefix": "",
       "serviceWorker": true,
-      "styles": [
-        "styles.scss"
-      ],
+      "styles": ["styles.scss"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+      "name": "layout",
+      "root": "libs/layout/src",
+      "appRoot": "",
+      "prefix": "sand"
     },
     {
       "name": "material",
@@ -81,10 +77,11 @@
     "component": {
       "inlineStyle": true,
       "inlineTemplate": true,
-      "changeDetection": "OnPush"
+      "changeDetection": "OnPush",
+      "flat": true
     },
     "schematics": {
-      "collection": "@nrwl/schematics"
+      "collection": "@ngrx/schematics"
     }
   }
 }
