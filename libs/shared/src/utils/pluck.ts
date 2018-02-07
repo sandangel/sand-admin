@@ -1,6 +1,5 @@
 import { OperatorFunction } from 'rxjs/interfaces';
 import { pluck as pluckOperator } from 'rxjs/operators';
-import { Observable } from 'rxjs/Observable';
 
 /**
  * Strong typed pluck function to replace
@@ -25,8 +24,6 @@ export function pluck<
   D extends keyof A[B][C],
   E extends keyof A[B][C][D]
 >(s1: B, s2: C, s3: D, s4: E): OperatorFunction<A, A[B][C][D][E]>;
-export function pluck(...props: string[]): any {
-  return function(source$: Observable<any>) {
-    return source$.pipe(pluckOperator(...props));
-  };
+export function pluck<T, V>(...props: string[]): OperatorFunction<T, V> {
+  return pluckOperator<T, V>(...props);
 }
