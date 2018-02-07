@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`layoutReducer should match snapshots 1`] = `
-Object {
-  "sidenavOpened": true,
-}
-`;
