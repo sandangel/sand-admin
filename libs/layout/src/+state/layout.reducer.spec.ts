@@ -15,11 +15,6 @@ describe('layoutReducer', () => {
     expect(actual).toEqual(layoutInitialState);
   });
 
-  it('should match snapshots', () => {
-    const action = createOpenSidenav();
-    expect(layoutReducer(layoutInitialState, action)).toMatchSnapshot();
-  });
-
   it('should have initial state if not provided', () => {
     const action = createOpenSidenav();
     expect(layoutReducer(undefined, action)).toEqual(layoutInitialState);
