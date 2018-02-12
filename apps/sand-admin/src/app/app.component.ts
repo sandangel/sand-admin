@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Pluck } from '@ngrx-utils/store';
 import { Observable } from 'rxjs/Observable';
-import { untilDestroy, pluck } from '@sand-libs/shared';
+import { untilDestroy, pluck } from '@ngrx-utils/store';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LayoutState, createSetSidenav } from '@sand-libs/layout';
 import { Store } from '@ngrx/store';
