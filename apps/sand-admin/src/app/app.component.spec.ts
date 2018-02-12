@@ -1,13 +1,12 @@
 /// <reference types="jest" />
-
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { routerReducer } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { MaterialModule } from '@sand-libs/material';
 
 import { AppComponent } from './app.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@sand-libs/material';
-import { StoreModule } from '@ngrx/store';
-import { routerReducer } from '@ngrx/router-store';
 import { REDUCER_TOKEN } from './app.module';
 
 describe('AppComponent', () => {
