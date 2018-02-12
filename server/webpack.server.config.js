@@ -1,14 +1,14 @@
-const path = require('path');
 const webpack = require('webpack');
+const { join } = require('path');
 
 module.exports = {
-  entry: { server: './server.ts', prerender: './prerender.ts' },
+  entry: { prerender: join(__dirname, './prerender.ts') },
   resolve: { extensions: ['.js', '.ts'] },
   target: 'node',
   // this makes sure we include node_modules and other 3rd party libraries
   externals: [/(node_modules|main\..*\.js)/],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: join(__dirname, '../dist'),
     filename: '[name].js'
   },
   module: {
@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        options: { configFile: path.resolve(__dirname, './tsconfig.server.json') }
+        options: { configFile: join(__dirname, './tsconfig.server.json') }
       }
     ]
   },
@@ -25,13 +25,9 @@ module.exports = {
     // for "WARNING Critical dependency: the request of a dependency is an expression"
     new webpack.ContextReplacementPlugin(
       /(.+)?angular(\\|\/)core(.+)?/,
-      path.join(__dirname, 'apps/sand-admin/src'), // location of your src
+      join(__dirname, '../apps/sand-admin/src'), // location of your src
       {} // a map of your routes
     ),
-    new webpack.ContextReplacementPlugin(
-      /(.+)?express(\\|\/)(.+)?/,
-      path.join(__dirname, 'apps/sand-admin/src'),
-      {}
-    )
+    new webpack.ContextReplacementPlugin(/(.+)?express(\\|\/)(.+)?/, join(__dirname, '../apps/sand-admin/src'), {})
   ]
 };
