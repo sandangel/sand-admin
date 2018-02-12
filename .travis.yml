@@ -8,5 +8,5 @@ cache:
 install:
   - yarn install
 script:
-  - yarn run test:unit
-  - yarn run coverage:ci
+  - yarn run lint
+  - yarn run build:prerender

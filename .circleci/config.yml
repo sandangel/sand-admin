@@ -23,8 +23,8 @@ jobs:
       - run: echo 'export PATH=$CIRCLE_WORKING_DIRECTORY/node_modules/.bin:$PATH' >> $BASH_ENV
 
       - save_cache:
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: v3-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - run: yarn run build:ssr
-      - run: yarn run generate:prerender
+      - run: yarn run format:check
+      - run: yarn run test:e2e
