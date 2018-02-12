@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -10,14 +10,9 @@ import { SharedModule } from '@sand-libs/shared';
 import { Observable } from 'rxjs/Observable';
 
 import { REDUCER_TOKEN } from '../app.module';
-import {
-  RouterActions,
-  RouterActionType,
-  createGo,
-  createForward,
-  createBack
-} from './router.actions.helpers';
+import { RouterActions, RouterActionType, createGo, createForward, createBack } from './router.actions.helpers';
 import { RouterEffects } from './router.effects';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'sand-test',
@@ -40,6 +35,13 @@ export class Test1Component {}
 })
 export class Test2Component {}
 
+@NgModule({
+  declarations: [TestComponent, Test1Component, Test2Component],
+  imports: [RouterModule.forRoot([])],
+  exports: [TestComponent, Test1Component, Test2Component]
+})
+export class TestModule {}
+
 describe('RouterEffects', () => {
   let actions$: Observable<RouterActions>;
   let effects: RouterEffects;
@@ -47,6 +49,7 @@ describe('RouterEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestModule,
         StoreModule.forRoot(REDUCER_TOKEN),
         RouterTestingModule.withRoutes([
           { path: '', component: TestComponent },
@@ -55,7 +58,6 @@ describe('RouterEffects', () => {
         ]),
         SharedModule
       ],
-      declarations: [TestComponent, Test1Component, Test2Component],
       providers: [
         RouterEffects,
         DataPersistence,
@@ -82,9 +84,7 @@ describe('RouterEffects', () => {
       'should get Router Forward action',
       async(async () => {
         actions$ = hot('-a-|', { a: createForward() });
-        expect(await readAll(effects.navigateForward$)).toEqual([
-          { type: RouterActionType.FORWARD }
-        ]);
+        expect(await readAll(effects.navigateForward$)).toEqual([{ type: RouterActionType.FORWARD }]);
       })
     );
 
