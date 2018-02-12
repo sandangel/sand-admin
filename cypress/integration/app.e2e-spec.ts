@@ -23,11 +23,6 @@ describe('TypeScript', () => {
     cy.wrap({}).should('deep.eq', {});
   });
 
-  it('should display welcome message', () => {
-    cy.visit('/');
-    cy.get('h1').should('contain', 'Welcome to app!');
-  });
-
   // enable once we release updated TypeScript definitions
   it('has Cypress object type definition', () => {
     expect(Cypress.version).to.be.a('string');
