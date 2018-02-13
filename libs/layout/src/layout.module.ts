@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 import { MaterialModule } from '@sand-libs/material';
 import { SharedModule } from '@sand-libs/shared';
-import { StoreModule } from '@ngrx/store';
+
 import { layoutReducer } from './+state/layout.reducer';
 import { LayoutComponent } from './containers/layout.component';
 import { ToolbarComponent } from './containers/toolbar.component';
