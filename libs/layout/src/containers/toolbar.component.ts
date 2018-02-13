@@ -6,7 +6,7 @@ import { LayoutState, createToggleSidenav } from '../+state';
   selector: 'sand-toolbar',
   template: `
     <mat-toolbar class="mat-elevation-z2" color="primary">
-    	<button mat-button (click)="toggleSidenav()">
+    	<button mat-icon-button (click)="toggleSidenav()">
     		<mat-icon>menu</mat-icon>
     	</button>Sand Admin Template
     </mat-toolbar>`,
