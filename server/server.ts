@@ -2,12 +2,11 @@ import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 
 import { enableProdMode } from '@angular/core';
-import { renderModuleFactory } from '@angular/platform-server';
 import { NestFactory } from '@nestjs/core';
+import { ngExpressEngine } from '@nguniversal/express-engine';
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import * as cors from 'cors';
 import * as express from 'express';
-import { readFileSync } from 'fs';
 import { join } from 'path';
 
 import { ApplicationModule } from './src/app.module';
@@ -21,23 +20,16 @@ async function bootstrap() {
   const DIST_FOLDER = join(process.cwd(), 'dist');
   const app = express();
 
-  // Our index.html we'll use as our template
-  const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();
-
   // * NOTE :: leave this as require() since this file is built Dynamically from webpack
   const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require(join(DIST_FOLDER, 'server', 'main.bundle'));
 
-  app.engine('html', (_: any, options: any, callback: any) => {
-    renderModuleFactory(AppServerModuleNgFactory, {
-      // Our index.html
-      document: template,
-      url: options.req.url,
-      // DI so that we can get lazy-loading to work differently (since we need it to just instantly render it)
-      extraProviders: [provideModuleMap(LAZY_MODULE_MAP)]
-    }).then(html => {
-      callback(null, html);
-    });
-  });
+  app.engine(
+    'html',
+    ngExpressEngine({
+      bootstrap: AppServerModuleNgFactory,
+      providers: [provideModuleMap(LAZY_MODULE_MAP)]
+    })
+  );
 
   app.set('view engine', 'html');
   app.set('views', join(DIST_FOLDER, 'browser'));
