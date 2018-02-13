@@ -1,22 +1,23 @@
-import { NgModule, InjectionToken } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Params, RouterModule, RouterStateSnapshot } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgrxUtilsModule } from '@ngrx-utils/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
-  StoreRouterConnectingModule,
   routerReducer,
   RouterReducerState,
-  RouterStateSerializer
+  RouterStateSerializer,
+  StoreRouterConnectingModule
 } from '@ngrx/router-store';
-import { StoreModule, ActionReducerMap, Store } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@sand-envs/environment';
 import { LayoutModule } from '@sand-libs/layout';
 import { MaterialModule } from '@sand-libs/material';
 import { SharedModule } from '@sand-libs/shared';
-import { RouterModule, Params, RouterStateSnapshot } from '@angular/router';
-import { NgrxSelect, NgrxUtilsModule } from '@ngrx-utils/store';
+import { storeFreeze } from 'ngrx-store-freeze';
 
 import { RouterEffects } from './+state/router.effects';
 import { AppComponent } from './app.component';
@@ -50,6 +51,23 @@ export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<State>>('Registered Reducers');
 
+// export function persistStore(reducer: ActionReducer<any>): ActionReducer<any> {
+//   return function(state: any | undefined, action: any) {
+//     if (!state) {
+//       const persistedState = localStorage.getItem('rootState');
+//       return persistedState ? JSON.parse(persistedState) : reducer(persistedState, action);
+//     }
+
+//     const nextState = reducer(state, action);
+
+//     localStorage.setItem('rootState', JSON.stringify(nextState));
+
+//     return nextState;
+//   };
+// }
+
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [storeFreeze] : [];
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -59,7 +77,7 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<State>>('Regist
     SharedModule,
     RouterModule.forRoot([]),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot(REDUCER_TOKEN),
+    StoreModule.forRoot(REDUCER_TOKEN, { metaReducers }),
     EffectsModule.forRoot([RouterEffects]),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
     StoreRouterConnectingModule.forRoot({
@@ -74,8 +92,4 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<State>>('Regist
     { provide: REDUCER_TOKEN, useFactory: () => ({ router: routerReducer }) }
   ]
 })
-export class AppModule {
-  constructor(store: Store<any>, ngrxSelect: NgrxSelect) {
-    ngrxSelect.connect(store);
-  }
-}
+export class AppModule {}
