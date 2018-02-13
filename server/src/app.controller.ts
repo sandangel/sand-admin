@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 export class AppController {
   renderCache: { [key: string]: string } = {};
 
-  constructor(@Inject('DIST_INDEX') private distIndex: string) {}
+  constructor(@Inject('DIST_TOKEN') private dist: string) {}
 
   @Get()
   routesRender(@Req() req: Request, @Res() res: Response) {
@@ -13,7 +13,7 @@ export class AppController {
       return res.send(this.renderCache[req.originalUrl]);
     }
 
-    return res.render(this.distIndex, { req }, (err, html) => {
+    return res.render(this.dist, { req }, (err, html) => {
       if (err) {
         console.error(err);
       }
