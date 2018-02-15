@@ -6,7 +6,7 @@ import { join } from 'path';
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const DIST_INDEX = join(DIST_FOLDER, 'browser', 'index.html');
 
-export const DIST_TOKEN = 'DIST_TOKEN';
+import { DIST_TOKEN } from './token';
 
 @Module({
   controllers: [AppController],

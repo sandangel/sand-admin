@@ -1,11 +1,13 @@
 import { Controller, Get, Req, Res, Inject } from '@nestjs/common';
 import { Request, Response } from 'express';
 
+import { DIST_TOKEN } from './token';
+
 @Controller('*')
 export class AppController {
   renderCache: { [key: string]: string } = {};
 
-  constructor(@Inject('DIST_TOKEN') private dist: string) {}
+  constructor(@Inject(DIST_TOKEN) private dist: string) {}
 
   @Get()
   routesRender(@Req() req: Request, @Res() res: Response) {
