@@ -1,13 +1,12 @@
-import { Controller, Get, Req, Res, Inject } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-
-import { DIST_TOKEN } from './token';
+import { AppConfig } from './app.config';
 
 @Controller('*')
 export class AppController {
   renderCache: { [key: string]: string } = {};
 
-  constructor(@Inject(DIST_TOKEN) private dist: string) {}
+  constructor(private config: AppConfig) {}
 
   @Get()
   routesRender(@Req() req: Request, @Res() res: Response) {
@@ -15,7 +14,7 @@ export class AppController {
       return res.send(this.renderCache[req.originalUrl]);
     }
 
-    return res.render(this.dist, { req }, (err, html) => {
+    return res.render(this.config.dist, { req }, (err, html) => {
       if (err) {
         console.error(err);
       }
