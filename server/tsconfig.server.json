@@ -5,5 +5,7 @@
     "baseUrl": "./",
     "module": "commonjs"
   },
-  "files": ["server.ts", "prerender.ts"]
+  "files": [
+    "server.ts"
+  ]
 }

@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        options: { configFile: join(__dirname, './tsconfig.server.json') }
+        options: { configFile: join(__dirname, './tsconfig.prerender.json') }
       }
     ]
   },
